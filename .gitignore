@@ -1,0 +1,63 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Environment variables & secrets
+.env
+.env.local
+.env.*.local
+*.env
+
+# Databases & raw data files
+papers.db
+*.db
+*.sqlite
+*.sqlite3
+
+# Retrieval indexes & search artifacts
+faiss_local.index
+*.index
+*.faiss
+bm25_index/
+data/
+
+# Model checkpoints & cache
+models/
+checkpoints/
+.cache/
+hf_cache/
+
+# Testing & coverage
+.pytest_cache/
+.coverage
+htmlcov/
+*.log
+
+# Frontend (Node / Vite / React)
+node_modules/
+dist/
+dist-ssr/
+
+# IDE & OS metadata
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
