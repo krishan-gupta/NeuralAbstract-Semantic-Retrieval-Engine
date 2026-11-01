@@ -5,8 +5,8 @@ from __future__ import annotations
 import argparse
 import logging
 import sqlite3
+from collections.abc import Iterator
 from pathlib import Path
-from typing import Iterator
 
 import arxiv
 from tqdm import tqdm
@@ -40,8 +40,9 @@ def clean_text(value: str) -> str:
 
 def iter_results(max_results: int) -> Iterator[arxiv.Result]:
     client = arxiv.Client()
-    search = arxiv.Search(query=QUERY, max_results=max_results,
-                          sort_by=arxiv.SortCriterion.SubmittedDate)
+    search = arxiv.Search(
+        query=QUERY, max_results=max_results, sort_by=arxiv.SortCriterion.SubmittedDate
+    )
     yield from client.results(search)
 
 
@@ -57,8 +58,12 @@ def ingest(database_path: Path, max_results: int = 1000) -> int:
 
     try:
         with sqlite3.connect(database_path) as connection:
-            for result in tqdm(iter_results(max_results), total=max_results,
-                               desc="Fetching arXiv papers", unit="paper"):
+            for result in tqdm(
+                iter_results(max_results),
+                total=max_results,
+                desc="Fetching arXiv papers",
+                unit="paper",
+            ):
                 cursor = connection.execute(
                     insert_sql,
                     (
@@ -81,12 +86,18 @@ def ingest(database_path: Path, max_results: int = 1000) -> int:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--db", type=Path, default=Path("papers.db"), help="SQLite database path")
-    parser.add_argument("--max-results", type=int, default=1000, help="Maximum number of arXiv results")
+    parser.add_argument(
+        "--db", type=Path, default=Path("papers.db"), help="SQLite database path"
+    )
+    parser.add_argument(
+        "--max-results", type=int, default=1000, help="Maximum number of arXiv results"
+    )
     parser.add_argument("--verbose", action="store_true")
     args = parser.parse_args()
-    logging.basicConfig(level=logging.INFO if args.verbose else logging.WARNING,
-                        format="%(asctime)s %(levelname)s %(message)s")
+    logging.basicConfig(
+        level=logging.INFO if args.verbose else logging.WARNING,
+        format="%(asctime)s %(levelname)s %(message)s",
+    )
     ingest(args.db, args.max_results)
 
 

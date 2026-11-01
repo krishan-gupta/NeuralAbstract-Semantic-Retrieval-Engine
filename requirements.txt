@@ -1,0 +1,12 @@
+arxiv
+bm25s
+faiss-cpu
+fastapi
+numpy
+openai
+pydantic
+sentence-transformers
+tqdm
+uvicorn[standard]
+pytest
+ruff

@@ -26,6 +26,7 @@ ENV/
 
 # Databases & raw data files
 papers.db
+papers*.db
 *.db
 *.sqlite
 *.sqlite3
@@ -35,7 +36,10 @@ faiss_local.index
 *.index
 *.faiss
 bm25_index/
+bm25_index*/
+emb_cache/
 data/
+index_stats.json
 
 # Model checkpoints & cache
 models/
@@ -45,9 +49,11 @@ hf_cache/
 
 # Testing & coverage
 .pytest_cache/
+.ruff_cache/
 .coverage
 htmlcov/
 *.log
+logs/
 
 # Frontend (Node / Vite / React)
 node_modules/
