@@ -18,11 +18,11 @@ PENDING = (
 
 
 def _format_percent(value: Any) -> str:
-    return f"{float(value) * 100:.2f}%" if isinstance(value, (int, float)) else "—"
+    return f"{float(value) * 100:.2f}%" if isinstance(value, (int, float)) else "n/a"
 
 
 def _format_number(value: Any) -> str:
-    return f"{float(value):.4f}" if isinstance(value, (int, float)) else "—"
+    return f"{float(value):.4f}" if isinstance(value, (int, float)) else "n/a"
 
 
 def render_results(result_path: Path) -> str:
@@ -51,7 +51,7 @@ def render_results(result_path: Path) -> str:
                 latency=(
                     f"{float(metrics['latency_ms']):.2f}"
                     if isinstance(metrics.get("latency_ms"), (int, float))
-                    else "—"
+                    else "n/a"
                 ),
                 size=size_mib,
             )
@@ -84,7 +84,7 @@ def render_results(result_path: Path) -> str:
             f"Hybrid local Recall@10 lift over BM25: **{lift_text}**.",
             "",
             (
-                "Mean paired NDCG@10 difference (Hybrid local − BM25), 95% bootstrap CI "
+                "Mean paired NDCG@10 difference (Hybrid local vs BM25), 95% bootstrap CI "
                 f"(1,000 resamples): **{interval_text}**."
             ),
             "",

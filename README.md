@@ -81,7 +81,25 @@ The API Benchmark tab and CLI share the same evaluation runner. Results include 
 ## Results
 
 <!-- RESULTS:START -->
-Results pending: run the labeling workflow and python evaluate.py --save benchmark_results.json.
+| Method / embedder | Recall@5 | Recall@10 | NDCG@5 | NDCG@10 | Latency (ms) | Index size (MiB) |
+|---|---:|---:|---:|---:|---:|---:|
+| bm25 | 12.14% | 26.11% | 0.7732 | 0.7711 | 5.48 | 123.56 |
+| dense:local | 10.89% | 20.55% | 0.7280 | 0.7202 | 54.60 | 220.87 |
+| hybrid:local | 11.80% | 21.45% | 0.7890 | 0.7403 | 60.63 | 220.87 |
+| dense:bge | 12.46% | 21.85% | 0.8195 | 0.7801 | 65.28 | 220.87 |
+| hybrid:bge | 16.09% | 26.60% | 0.8605 | 0.8108 | 66.35 | 220.87 |
+
+Hybrid local Recall@10 lift over BM25: **-17.8%**.
+
+Mean paired NDCG@10 difference (Hybrid local vs BM25), 95% bootstrap CI (1,000 resamples): **[-0.1140, 0.0502]**.
+
+Evaluation used **16 queries, 815 judgments, 1 labeler, pooled judgments**.
+
+NDCG@10 wins/ties/losses (Hybrid local vs BM25): **5/5/6**.
+
+On these 16 queries, Hybrid local Recall@10 was 21.45% and BM25 Recall@10 was 26.11%; the mean NDCG@10 difference was -0.0308 with a 95% interval of [-0.1140, 0.0502].
+
+<!-- BENCHMARK_RESULTS_SHA256:da4ae349b8ad8e2790388ebb8b68d754a69463555619ae0a36a85c29f33a324f -->
 <!-- RESULTS:END -->
 
 Run `python scripts\update_readme_results.py` after producing `benchmark_results.json` to regenerate this section. The generated metrics and interpretation are read from that file.
