@@ -33,7 +33,7 @@ source cleanup. `.gitignore` intentionally excludes most of them.
 | `bm25_index/` | Active BM25 sparse index, validated with a 150,000-row SQLite ID mapping. |
 | `papers_1k.db`, `faiss_local_1k.index`, `faiss_phase2_check.index`, `bm25_index_1k/` | Older generated/demo/check artifacts. They are not used by the active app pipeline; retain as local files unless deliberately cleaning up backups. |
 | `emb_cache/` | Resumable embedding chunks used by `build_index.py`; useful during long indexing runs. |
-| `labels.db` | Human benchmark store. It currently has 16 query records and zero paper judgments, so evaluation has no relevance labels to score yet. |
+| `labels.db` | Human benchmark store with 16 query records, 16 persistent pools, and 815 real judgments (542 Relevant, 273 Not relevant). All pool candidates are judged. |
 | `.venv/`, `node_modules/`, `dist/`, `__pycache__/`, `.pytest_cache/` | Re-creatable environments, build products, and caches. They are not project source and are ignored by Git. |
 
 ## Cleanup guidance
@@ -55,7 +55,7 @@ source cleanup. `.gitignore` intentionally excludes most of them.
 
 The UI/API/index pipeline and the 150,000-paper Kaggle-derived corpus are
 present. Both dense indexes and the sparse index are aligned to the corpus.
-Sixteen benchmark queries and candidate pools are prepared, but `labels.db`
-currently has zero human relevance judgments. Label export, measured benchmark
-results, and the generated README results table therefore remain pending until
-human judgments are collected.
+Sixteen benchmark queries have complete, persistent candidate pools and 815
+human relevance judgments. `labels.json`, `benchmark_results.json`, the
+generated README results block, and three UI screenshots are present. Run
+`python status.py` to check their current freshness and alignment.
